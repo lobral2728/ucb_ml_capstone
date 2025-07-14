@@ -1,0 +1,5 @@
+data/
+dataset/
+envs/
+.ipynb_checkpoints/
+anaconda_projects/
