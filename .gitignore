@@ -4,3 +4,5 @@ envs/
 .ipynb_checkpoints/
 anaconda_projects/
 .venv/
+.kaggle/
+__pycache__/
