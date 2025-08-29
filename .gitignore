@@ -6,3 +6,7 @@ anaconda_projects/
 .venv/
 .kaggle/
 __pycache__/
+best_stage*
+human_avatar_not_human.keras
+my_preds.csv
+my_report.png
