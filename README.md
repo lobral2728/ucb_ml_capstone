@@ -121,4 +121,3 @@ Key reported metrics include accuracy, per‑class precision/recall/F1, and a co
 
 ## Notes
 - We intentionally **do not fine‑tune** the backbone in this version to keep training fast and reproducible. Future work can unfreeze upper ResNet blocks and fine‑tune at a lower learning rate.
-- Be mindful of privacy and compliance when handling user images. Ensure your usage conforms to policy and consent requirements.
