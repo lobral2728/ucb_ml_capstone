@@ -44,6 +44,10 @@ Three classes will be used in this model:
 - **LoadDataset.ipynb** (<https://github.com/lobral2728/ucb_ml_capstone/blob/main/LoadDataset.ipynb>)— Locates images in `data/final/`, builds deterministic stratified splits, and constructs an efficient `tf.data` input pipeline (decode -> resize with padding -> normalize -> optional augmentation). Includes quick EDA and visualization of class balance, sample images, and integrity checks (e.g., dedup across splits).
 - **UCB_ML_Capstone.ipynb** (<https://github.com/lobral2728/ucb_ml_capstone/blob/main/UCB_ML_Capstone.ipynb>)— Defines, trains, and evaluates the model (ResNet50 backbone frozen; classification head trained). Exports metrics, a confusion matrix, classification report, and a 24‑image **test predictions gallery** with labels, predictions, and probabilities.
 
+## Development Environment - Third time's the charm!
+
+Initially, the notebooks were built on Windows 11 using Anaconda. As the model evolved, building on the CPU became very slow. After several attempts to optimize for CPU, developing on native Windows was abandoned. Enter Docker: Docker offers prebuilt images for TensorFlow, and it has no problem accessing the PC’s GPU. Unfortunately, out-of-memory conditions plagued this approach. Finally, development was moved to Colab. After a few days of learning how Colab works, developing notebooks was a breeze. You can access as much GPU as you need, and running out of memory didn’t seem to be an issue. That’s not to say Colab doesn’t have its quirks but that’s a topic for another time.
+
 ## Why ResNet50?
 ResNet‑50 is a strong, widely validated backbone for image classification, with skip‑connections that enable training deeper models reliably. Features learned on large natural‑image corpora (e.g., ImageNet) transfer well to downstream tasks, especially in the early convolutional blocks. We use ResNet‑50 as a frozen **feature extractor** and train a lightweight head on top.
 - He et al., “Deep Residual Learning for Image Recognition.” CVPR 2016 / arXiv:1512.03385.  
