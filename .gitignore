@@ -14,4 +14,4 @@ label_mapping.json
 resnet50_best.weights.h5
 history_frozen.json
 resnet50_profilepic_classifier.weights.h5
-test_predictions_gallery.png
+*sav*
