@@ -1,4 +1,4 @@
-# Profile Photo Classifier (Human vs Avatar vs Animal)
+# Profile Photo Classifier
 
 ## Background and Problem Statement
 
