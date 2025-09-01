@@ -52,7 +52,7 @@ ResNet‑50 is a strong, widely validated backbone for image classification, wit
 
 > Note: In this project we **do not perform fine‑tuning** of the backbone (all ResNet layers remain non‑trainable). This choice keeps training fast and stable and simplifies reproducibility. You can enable fine‑tuning later as an extension.
 
-## Data
+## Data Processing
 
 We combined **three labeled image sources** into a single, de‑duplicated dataset and then used the on‑disk stratified splits under `data/final/`.
 
