@@ -4,19 +4,11 @@
 
 Companies are encouraging their people to add their pictures into their Office365 profiles. Since many companis are large and geographically spread out, the primary mode of communication is Teams chats. Having a picture in your profile is a way to increase the familiarity and connection between people. Often, less than 50% have their picture up. There pictures of pets, cartoon faces, cars, landscapes, and many other creative expressions but not helpful in achieving the goal. Ultimately using a model to determine if a person has a human picture or a picture of something will create a cost-effective way to track if profiles have pictures of the employees.
 
-### Data Sources
-
-Ultimately, the Microsoft Graph API will be used to mine profile pictures to classify them as human or not. For the purpose of training the model, I will be using the FairFace Links to an external site.dataset. This dataset has a balanced set of faces in terms of race, age, and gender. I plan to add a dataset from Kaggle that contains animal faces Links to an external site.to complete the dataset. The training set will be approximately 10,000 human faces and 10,000 animal faces. I may also utilize other picture types depending on the results.
-
-### Techniques
-
-I plan to heavily rely on Convolutional Neural Network (CNN) modeling utilizing the ResNet50 pretrained model as foundation. In my trails thus far, building my own CNN from scratch is proving very difficult. Fine-tuning an existing CNN is the preferred method in this case. 
-
 ### Expected Results
 
 By utilizing a pretrained model and fine-tuning it with the dataset described above, I expect to be able to a multi-classifier that can detect when a picture is a human face. I also expect the results to be consistent across race, gender, and age. 
 
-## Dataset
+## Data Sources
 We built the working dataset by combining **three sources referenced directly in `LoadDataset.ipynb`**:
 
 - **Human faces — FairFace (Balanced Adults)**  
@@ -29,20 +21,6 @@ We built the working dataset by combining **three sources referenced directly in
 
 - **Animals / “other” — Kaggle: Dogs vs Cats**  
   Kaggle dataset: <https://www.kaggle.com/datasets/salader/dogs-vs-cats>
-
-### How we combined them
-
-1. **Download & verify** the three sources into `data/raw/` (outside version control). Non‑image and corrupt files were removed; all images standardized to RGB.
-2. **Relabel to a common schema** by mapping each source to one target class:  
-   `FairFace → human`, `Cartoon Set (Kaggle) → avatar`, `Dogs vs Cats (Kaggle) → animal` (and we routed miscellaneous “other” images into `animal` for enforcement simplicity).
-3. **Manifest & hashing.** We built a manifest with `source, rel_path, class, sha1, phash` so we could track provenance and de‑duplicate.
-4. **De‑duplication across and within sources.** Exact duplicates were dropped by `sha1`. Near‑duplicates were flagged with perceptual hash (pHash) and removed preferentially from `val`/`test` to avoid leakage.
-5. **Stratified split** (fixed seed) into `train`/`val`/`test`, preserving class proportions; final files materialized under  
-   `data/final/{train,val,test}/{human,avatar,animal}/`.
-6. **On‑the‑fly resizing** is performed in the input pipeline with `tf.image.resize_with_pad` (not destructively on disk) to preserve aspect ratio and avoid cropping faces.
-7. **Imbalance handling** uses **class weights** at training time rather than over/under‑sampling on disk.
-
-> The `LoadDataset.ipynb` notebook contains the exact commands and integrity checks (including duplicate detection across splits). In the latest build, **no cross‑split exact duplicates were found**.
 
 Three classes will be used in this model:
 - `human` — a real human face is present,
@@ -75,6 +53,7 @@ ResNet‑50 is a strong, widely validated backbone for image classification, wit
 > Note: In this project we **do not perform fine‑tuning** of the backbone (all ResNet layers remain non‑trainable). This choice keeps training fast and stable and simplifies reproducibility. You can enable fine‑tuning later as an extension.
 
 ## Data
+
 We combined **three labeled image sources** into a single, de‑duplicated dataset and then used the on‑disk stratified splits under `data/final/`.
 
 > Replace the placeholders with your actual dataset names/links.
