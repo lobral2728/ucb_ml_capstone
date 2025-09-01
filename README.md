@@ -1,33 +1,54 @@
-# UC Berkeley ML Capstone — Profile Photo Classifier (Human vs Avatar vs Animal)
+# Profile Photo Classifier (Human vs Avatar vs Animal)
 
+## Background and Problem Statement
 
-My company is encouraging people to add their pictures into their Office365 profiles. Since the company is large and geographically spread out, the primary mode of communication is Teams chats. Having a picture in your profile is a way to increase the familiarity and connection between people. Currently, less than 50% have their picture up. There are thousands of pictures of pets, cartoon faces, cars, landscapes, and many other creative expressions but not helpful in achieving the goal. Ultimately using a model to determine if a person has a human picture or a picture of something will create a cost-effective way to track if we are closing in on the goal.
+Companies are encouraging their people to add their pictures into their Office365 profiles. Since many companis are large and geographically spread out, the primary mode of communication is Teams chats. Having a picture in your profile is a way to increase the familiarity and connection between people. Often, less than 50% have their picture up. There pictures of pets, cartoon faces, cars, landscapes, and many other creative expressions but not helpful in achieving the goal. Ultimately using a model to determine if a person has a human picture or a picture of something will create a cost-effective way to track if profiles have pictures of the employees.
 
-Data Sources
+### Data Sources
 
 Ultimately, the Microsoft Graph API will be used to mine profile pictures to classify them as human or not. For the purpose of training the model, I will be using the FairFace Links to an external site.dataset. This dataset has a balanced set of faces in terms of race, age, and gender. I plan to add a dataset from Kaggle that contains animal faces Links to an external site.to complete the dataset. The training set will be approximately 10,000 human faces and 10,000 animal faces. I may also utilize other picture types depending on the results.
 
-Techniques
+### Techniques
 
 I plan to heavily rely on Convolutional Neural Network (CNN) modeling utilizing the ResNet50 pretrained model as foundation. In my trails thus far, building my own CNN from scratch is proving very difficult. Fine-tuning an existing CNN is the preferred method in this case. 
 
-Expected Results
+### Expected Results
 
-By utilizing a pretrained model and fine-tuning it with the dataset described above, I expect to be able to build a binary classifier that can detect when a picture is a human face. I also expect the results to be consistent across race, gender, and age. 
+By utilizing a pretrained model and fine-tuning it with the dataset described above, I expect to be able to a multi-classifier that can detect when a picture is a human face. I also expect the results to be consistent across race, gender, and age. 
 
-Why This is Important
+## Dataset
+We built the working dataset by combining **three sources referenced directly in `LoadDataset.ipynb`**:
 
-Currently, the reporting on this initiative is taking a person one day per reporting period to create this report by hand. With the model in place, that time can be significantly reduced. The job for a person then becomes only evaluating only the pictures where the model was not highly certain. Additionally, the ultimate goal of getting people more familiar with their peers can pay off in less quantifiable ways.
+- **Human faces — FairFace (Balanced Adults)**  
+  Repository: <https://github.com/joojs/fairface>  
+  Paper: <https://arxiv.org/pdf/2009.03224>  
+  *(The notebook also includes direct Google Drive links for the FairFace image zips.)*
 
-## Problem Statement
-Organizations often allow users to set custom profile pictures in Office 365. Many pictures are **not** real human faces (e.g., avatars, pets, landscapes). The goal of this project is to **classify an image into one of three categories**:
+- **Avatars of human faces — Kaggle: Google Cartoon Set (rehost)**  
+  Kaggle dataset: <https://www.kaggle.com/datasets/brendanartley/cartoon-faces-googles-cartoon-set>
+
+- **Animals / “other” — Kaggle: Dogs vs Cats**  
+  Kaggle dataset: <https://www.kaggle.com/datasets/salader/dogs-vs-cats>
+
+### How we combined them
+
+1. **Download & verify** the three sources into `data/raw/` (outside version control). Non‑image and corrupt files were removed; all images standardized to RGB.
+2. **Relabel to a common schema** by mapping each source to one target class:  
+   `FairFace → human`, `Cartoon Set (Kaggle) → avatar`, `Dogs vs Cats (Kaggle) → animal` (and we routed miscellaneous “other” images into `animal` for enforcement simplicity).
+3. **Manifest & hashing.** We built a manifest with `source, rel_path, class, sha1, phash` so we could track provenance and de‑duplicate.
+4. **De‑duplication across and within sources.** Exact duplicates were dropped by `sha1`. Near‑duplicates were flagged with perceptual hash (pHash) and removed preferentially from `val`/`test` to avoid leakage.
+5. **Stratified split** (fixed seed) into `train`/`val`/`test`, preserving class proportions; final files materialized under  
+   `data/final/{train,val,test}/{human,avatar,animal}/`.
+6. **On‑the‑fly resizing** is performed in the input pipeline with `tf.image.resize_with_pad` (not destructively on disk) to preserve aspect ratio and avoid cropping faces.
+7. **Imbalance handling** uses **class weights** at training time rather than over/under‑sampling on disk.
+
+> The `LoadDataset.ipynb` notebook contains the exact commands and integrity checks (including duplicate detection across splits). In the latest build, **no cross‑split exact duplicates were found**.
+
+Three classes will be used in this model:
 - `human` — a real human face is present,
 - `avatar` — stylized/cartoon/AI-generated depiction of a human face,
 - `animal` — any non‑human class (we also map “other/objects/landscapes” into this bucket for enforcement simplicity).
 
-This helps downstream identity and compliance workflows by flagging non‑compliant images for review.
-
-## Repository Structure
 ```
 .
 ├── data/
@@ -38,15 +59,12 @@ This helps downstream identity and compliance workflows by flagging non‑compli
 │       │   ├── human/   ├── avatar/   └── animal/
 │       └── test/
 │           ├── human/   ├── avatar/   └── animal/
-├── LoadDataset.ipynb          # builds the tf.data pipeline, sanity checks, EDA/visualizations
-├── UCB_ML_Capstone.ipynb      # trains and evaluates the ResNet50-based classifier
-├── README.md
-└── test_predictions_gallery.png  # sample gallery of test images with predictions
 ```
 
 ## Notebooks
-- **LoadDataset.ipynb** — Locates images in `data/final/`, builds deterministic stratified splits (already on disk), and constructs an efficient `tf.data` input pipeline (decode → resize with padding → normalize → optional augmentation). Includes quick EDA and visualization of class balance, sample images, and integrity checks (e.g., dedup across splits).
-- **UCB_ML_Capstone.ipynb** — Defines, trains, and evaluates the model (ResNet50 backbone frozen; classification head trained). Exports metrics, a confusion matrix, classification report, and a 24‑image **test predictions gallery** with labels, predictions, and probabilities.
+
+- **LoadDataset.ipynb** (<https://github.com/lobral2728/ucb_ml_capstone/blob/main/LoadDataset.ipynb>)— Locates images in `data/final/`, builds deterministic stratified splits, and constructs an efficient `tf.data` input pipeline (decode -> resize with padding -> normalize -> optional augmentation). Includes quick EDA and visualization of class balance, sample images, and integrity checks (e.g., dedup across splits).
+- **UCB_ML_Capstone.ipynb** (<https://github.com/lobral2728/ucb_ml_capstone/blob/main/UCB_ML_Capstone.ipynb>)— Defines, trains, and evaluates the model (ResNet50 backbone frozen; classification head trained). Exports metrics, a confusion matrix, classification report, and a 24‑image **test predictions gallery** with labels, predictions, and probabilities.
 
 ## Why ResNet50?
 ResNet‑50 is a strong, widely validated backbone for image classification, with skip‑connections that enable training deeper models reliably. Features learned on large natural‑image corpora (e.g., ImageNet) transfer well to downstream tasks, especially in the early convolutional blocks. We use ResNet‑50 as a frozen **feature extractor** and train a lightweight head on top.
@@ -93,7 +111,7 @@ We combined **three labeled image sources** into a single, de‑duplicated datas
 - **Batch size:** 16 (fits a typical 8–12 GB GPU with 224×224 inputs and augmentation).
 
 ## Running
-1. Place your consolidated data under `data/final/{train,val,test}/{human,avatar,animal}/`.
+1. Consolidated data under `data/final/{train,val,test}/{human,avatar,animal}/`.
 2. Run **LoadDataset.ipynb** to verify splits, view sample images, and build the `tf.data` pipeline.
 3. Run **UCB_ML_Capstone.ipynb** to train/evaluate. The notebook will:
    - compute class weights from the train distribution,
@@ -125,33 +143,3 @@ Key reported metrics include accuracy, per‑class precision/recall/F1, and a co
 ## Notes
 - We intentionally **do not fine‑tune** the backbone in this version to keep training fast and reproducible. Future work can unfreeze upper ResNet blocks and fine‑tune at a lower learning rate.
 - Be mindful of privacy and compliance when handling user images. Ensure your usage conforms to policy and consent requirements.
-
-
-## Datasets
-
-We built the working dataset by combining **three sources referenced directly in `LoadDataset.ipynb`**:
-
-- **Human faces — FairFace (Balanced Adults)**  
-  Repository: <https://github.com/joojs/fairface>  
-  Paper: <https://arxiv.org/pdf/2009.03224>  
-  *(The notebook also includes direct Google Drive links for the FairFace image zips.)*
-
-- **Avatars of human faces — Kaggle: Google Cartoon Set (rehost)**  
-  Kaggle dataset: <https://www.kaggle.com/datasets/brendanartley/cartoon-faces-googles-cartoon-set>
-
-- **Animals / “other” — Kaggle: Dogs vs Cats**  
-  Kaggle dataset: <https://www.kaggle.com/datasets/salader/dogs-vs-cats>
-
-### How we combined them
-
-1. **Download & verify** the three sources into `data/raw/` (outside version control). Non‑image and corrupt files were removed; all images standardized to RGB.
-2. **Relabel to a common schema** by mapping each source to one target class:  
-   `FairFace → human`, `Cartoon Set (Kaggle) → avatar`, `Dogs vs Cats (Kaggle) → animal` (and we routed miscellaneous “other” images into `animal` for enforcement simplicity).
-3. **Manifest & hashing.** We built a manifest with `source, rel_path, class, sha1, phash` so we could track provenance and de‑duplicate.
-4. **De‑duplication across and within sources.** Exact duplicates were dropped by `sha1`. Near‑duplicates were flagged with perceptual hash (pHash) and removed preferentially from `val`/`test` to avoid leakage.
-5. **Stratified split** (fixed seed) into `train`/`val`/`test`, preserving class proportions; final files materialized under  
-   `data/final/{train,val,test}/{human,avatar,animal}/`.
-6. **On‑the‑fly resizing** is performed in the input pipeline with `tf.image.resize_with_pad` (not destructively on disk) to preserve aspect ratio and avoid cropping faces.
-7. **Imbalance handling** uses **class weights** at training time rather than over/under‑sampling on disk.
-
-> The `LoadDataset.ipynb` notebook contains the exact commands and integrity checks (including duplicate detection across splits). In the latest build, **no cross‑split exact duplicates were found**.
