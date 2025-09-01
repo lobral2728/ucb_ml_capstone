@@ -15,3 +15,5 @@ resnet50_best.weights.h5
 history_frozen.json
 resnet50_profilepic_classifier.weights.h5
 *sav*
+*.old.*
+*.new*
