@@ -35,9 +35,9 @@ Planned/used sources (documented in notebooks):
     - Kaggle dataset: <https://www.kaggle.com/datasets/salader/dogs-vs-cats>
 
 The final dataset looks like:<br>
-Train: 24,000 total -> {'human': 8000, 'avatar': 8000, 'animal': 8000}<br>
-Val: 3,000 total -> {'human': 1000, 'avatar': 1000, 'animal': 1000}<br>
-Test: 3,000 total -> {'human': 1000, 'avatar': 1000, 'animal': 1000}<br>
+   Train: 24,000 total -> {'human': 8000, 'avatar': 8000, 'animal': 8000}<br>
+   Val: 3,000 total -> {'human': 1000, 'avatar': 1000, 'animal': 1000}<br>
+   Test: 3,000 total -> {'human': 1000, 'avatar': 1000, 'animal': 1000}<br>
 
 #### Methodology
 1. **Data loading & cleaning** (see [LoadDataset.ipynb](LoadDataset.ipynb)):
