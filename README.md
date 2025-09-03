@@ -77,6 +77,7 @@ There are many opportunities to do additional analysis and modeling in the next 
 - Look at hyperameters and tuning, including batch size, image size, unfrozen layers, regularization, and more.
 - Finetuning
 - Packaging for Azure (independent of this assignment). [Repo](https://github.com/lobral2728/azureprofileapp)
+- I'm looking forward to the upcoming module that cover CNNs to learn other steps to try.
 
 #### Outline of project
 - [LoadDataset.ipynb with no output](LoadDataset.ipynb) — dataset ingestion, cleaning, splits, and data quality checks. The notebook created in Google Colab does not render in GitHub when there is output in it. This notebook shows the code.
