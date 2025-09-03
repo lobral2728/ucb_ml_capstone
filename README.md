@@ -18,7 +18,7 @@ provide the foundation model that could be used for that effort.
 Accurate identification of real human faces in corporate profile photos improves directory quality, compliance with internal policies, and downstream people-search experiences. Automating this classification reduces manual review burden and increases consistency across a large tenant.
 
 #### Research Question
-**Can we reliably distinguish real human-face profile images from non-human images using a lightweight, production-friendly baseline model?**  
+**Can we reliably distinguish real human-face profile images, avatar images of human faces, and from non-human images (e.g. cat, dog) using a lightweight, production-friendly baseline model?**  
 
 Sub-question explored in EDA:
 - Does the dataset represent many cultures and ages, and both sexes in a balanced way.
