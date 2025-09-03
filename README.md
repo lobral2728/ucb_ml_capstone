@@ -18,10 +18,10 @@ provide the foundation model that could be used for that effort.
 Accurate identification of real human faces in corporate profile photos improves directory quality, compliance with internal policies, and downstream people-search experiences. Automating this classification reduces manual review burden and increases consistency across a large tenant.
 
 #### Research Question
-**Can we reliably distinguish real human-face profile images from non-human images using a lightweight, production-friendly baseline model?**  
+**Can we reliably distinguish real human-face profile images, avatar images of human faces, and from non-human images (e.g. cat, dog) using a lightweight, production-friendly baseline model?**  
 
 Sub-question explored in EDA:
-- Does the dataset represent many cultures and ages, and both sexes in a balanced way.
+- Can we accurately predict human images for diverse cultures, ages, and both sexes.
 
 #### Data Sources
 Three separate datasets were used to provide input to create a unique dataset for this projects. 
@@ -77,10 +77,11 @@ There are many opportunities to do additional analysis and modeling in the next 
 - Look at hyperameters and tuning, including batch size, image size, unfrozen layers, regularization, and more.
 - Finetuning
 - Packaging for Azure (independent of this assignment). [Repo](https://github.com/lobral2728/azureprofileapp)
+- I'm looking forward to the upcoming module that cover CNNs to learn other steps to try.
 
 #### Outline of project
 - [LoadDataset.ipynb with no output](LoadDataset.ipynb) — dataset ingestion, cleaning, splits, and data quality checks. The notebook created in Google Colab does not render in GitHub when there is output in it. This notebook shows the code.
-- [LoadDataset.ipynb with output](output/loadDataset.ipynb) - This notebook shows output. You will need to clone the repo and look at the notebook with VS Code or a similar tool.
+- [LoadDataset.ipynb with output](output/LoadDataset.ipynb) - This notebook shows output. You will need to clone the repo and look at the notebook with VS Code or a similar tool.
 - [UCB_ML_Capstone.ipynb](UCB_ML_Capstone.ipynb) — EDA visuals, baseline model training/evaluation, and error analysis.
 
 ##### Contact and Further Information
