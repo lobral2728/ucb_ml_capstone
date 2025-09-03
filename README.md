@@ -84,6 +84,3 @@ There are many opportunities to do additional analysis and modeling in the next 
 
 ##### Contact and Further Information
 For questions or collaboration, please contact **Allen Long** by filing an issue in the GitHub repo.
-
-
-
