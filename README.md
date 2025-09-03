@@ -63,8 +63,8 @@ The final dataset looks like:<br>
 The training and validation accuracy for the frozen base model are extremely high, roughly 99.8–100% after the first couple of epochs. Early stopping happened at epoch 8 when 15 total epochs were set.
 ![Accuracy](images/accuracy.png)
 
-Accuracy: 0.9997 on 3,000 images (2,999/3,000 correct).
-Macro/weighted F1: 0.9997 — performance is uniformly high across classes.
+- Accuracy: 0.9997 on 3,000 images (2,999/3,000 correct).
+- Macro/weighted F1: 0.9997 — performance is uniformly high across classes.
 ![Confusion matrix](images/confusion_matrix.png)
 
 The sample output demonstrates the ability of the model to classify humans, avatars (of human faces), and animals (cats, dogs).
