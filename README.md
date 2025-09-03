@@ -31,14 +31,13 @@ Planned/used sources (documented in notebooks):
     - Repository: <https://github.com/joojs/fairface>
 - **Avatar:** - Google Cartoon Set / “cartoon faces”
     - Kaggle dataset: <https://www.kaggle.com/datasets/brendanartley/cartoon-faces-googles-cartoon-set>
-- **animals** - Dogs vs Cats
+- **Animals** - Dogs vs Cats
     - Kaggle dataset: <https://www.kaggle.com/datasets/salader/dogs-vs-cats>
 
-
 The final dataset looks like:
-Train: 24,000 total → {'human': 8000, 'avatar': 8000, 'animal': 8000}
-Val: 3,000 total → {'human': 1000, 'avatar': 1000, 'animal': 1000}
-Test: 3,000 total → {'human': 1000, 'avatar': 1000, 'animal': 1000}
+- Train: 24,000 total -> {'human': 8000, 'avatar': 8000, 'animal': 8000}
+- Val: 3,000 total -> {'human': 1000, 'avatar': 1000, 'animal': 1000}
+- Test: 3,000 total -> {'human': 1000, 'avatar': 1000, 'animal': 1000}
 
 #### Methodology
 1. **Data loading & cleaning** (see `LoadDataset.ipynb`):
