@@ -27,12 +27,12 @@ Sub-question explored in EDA:
 Three separate datasets were used to provide input to create a unique dataset for this projects. 
 
 Planned/used sources (documented in notebooks):
-- **Human faces:** - [FairFace](https://github.com/joojs/fairface) (diverse, labeled faces)
-    Repository: <https://github.com/joojs/fairface>
-- **Avatar:** - [Google Cartoon Set / “cartoon faces”](https://www.kaggle.com/datasets/brendanartley/cartoon-faces-googles-cartoon-set)
-    Kaggle dataset: <https://www.kaggle.com/datasets/brendanartley/cartoon-faces-googles-cartoon-set>
-- **animals** - [Dogs vs Cats](https://www.kaggle.com/datasets/salader/dogs-vs-cats)
-    Kaggle dataset: <https://www.kaggle.com/datasets/salader/dogs-vs-cats>
+- **Human faces:** - FairFace (diverse, labeled faces)
+    - Repository: <https://github.com/joojs/fairface>
+- **Avatar:** - Google Cartoon Set / “cartoon faces”
+    - Kaggle dataset: <https://www.kaggle.com/datasets/brendanartley/cartoon-faces-googles-cartoon-set>
+- **animals** - Dogs vs Cats
+    - Kaggle dataset: <https://www.kaggle.com/datasets/salader/dogs-vs-cats>
 
 
 The final dataset looks like:
