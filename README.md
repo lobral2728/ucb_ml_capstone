@@ -40,15 +40,15 @@ The final dataset looks like:
 - Test: 3,000 total -> {'human': 1000, 'avatar': 1000, 'animal': 1000}
 
 #### Methodology
-1. **Data loading & cleaning** (see `LoadDataset.ipynb`):
+1. **Data loading & cleaning** (see [LoadDataset.ipynb](LoadDataset.ipynb)):
    - Ingest datasets into a common folder structure with `train/val/test` splits.
    - Deduplicate and remove unreadable or tiny images.
-2. **EDA** (see `UCB_ML_Capstone.ipynb`):
+2. **EDA** (see [UCB_ML_Capstone.ipynb](UCB_ML_Capstone.ipynb)):
    - Class distribution and split verification.
    - Sample grids of each class.
-3. **Feature engineering** (see `UCB_ML_Capstone.ipynb`):
+3. **Feature engineering** (see [UCB_ML_Capstone.ipynb](UCB_ML_Capstone.ipynb)):
    - Basic augmentations using a Keras data_augmentation layer with RandomFlip, RandomRotation, RandomBrightness, and RandomContrast during training.
-4. **Baseline model** (trained/evaluated in `UCB_ML_Capstone.ipynb`):
+4. **Baseline model** (trained/evaluated in [UCB_ML_Capstone.ipynb](UCB_ML_Capstone.ipynb)):
    - **Approach:** Pretrained ResNet50 (frozen) as a feature extractor, with a small classification head (softmax) for three-way classification — human, avatar, and animal.
    - **Why:** Strong off-the-shelf features, quick to train, easy to deploy; serves as a fair, reproducible starting point for Module 24 comparisons.
 5. **Evaluation (baseline):**
