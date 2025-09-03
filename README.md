@@ -80,7 +80,7 @@ There are many opportunities to do additional analysis and modeling in the next 
 
 #### Outline of project
 - [LoadDataset.ipynb with no output](LoadDataset.ipynb) — dataset ingestion, cleaning, splits, and data quality checks. The notebook created in Google Colab does not render in GitHub when there is output in it. This notebook shows the code.
-- [LoadDataset.ipynb with output](output/loadDataset.ipynb) - This notebook shows output. You will need to clone the repo and look at the notebook with VS Code or a similar tool.
+- [LoadDataset.ipynb with output](output/LoadDataset.ipynb) - This notebook shows output. You will need to clone the repo and look at the notebook with VS Code or a similar tool.
 - [UCB_ML_Capstone.ipynb](UCB_ML_Capstone.ipynb) — EDA visuals, baseline model training/evaluation, and error analysis.
 
 ##### Contact and Further Information
