@@ -19,6 +19,7 @@ Accurate identification of real human faces in corporate profile photos improves
 
 #### Research Question
 **Can we reliably distinguish real human-face profile images from non-human images using a lightweight, production-friendly baseline model?**  
+
 Sub-question explored in EDA:
 - Does the dataset represent many cultures and ages, and both sexes in a balanced way.
 
@@ -63,7 +64,6 @@ Test: 3,000 total → {'human': 1000, 'avatar': 1000, 'animal': 1000}
 ![Sample Test Predictions](images/test_predictions_gallery.png)
 
 #### Next steps
-What suggestions do you have for next steps?
 
 More non-human image subjects.
 Compare other models
@@ -71,7 +71,7 @@ Hyperparameter tuning
 Finetuning
 MobileNet
 Read output
-- Packaging for Azure inference (container, health checks, telemetry).
+Packaging for Azure inference (container, health checks, telemetry).
 
 #### Outline of project
 - [LoadDataset.ipynb](LoadDataset.ipynb) — dataset ingestion, cleaning, splits, and data quality checks.
