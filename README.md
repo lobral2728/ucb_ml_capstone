@@ -1,127 +1,84 @@
-# Profile Photo Classifier
+### Photo Classification with ResNet50
 
-## Background and Problem Statement
+**Author** 
+Allen Long
 
-Companies are encouraging their people to add their pictures into their Office365 profiles. Since many companis are large and geographically spread out, the primary mode of communication is Teams chats. Having a picture in your profile is a way to increase the familiarity and connection between people. Often, less than 50% have their picture up. There pictures of pets, cartoon faces, cars, landscapes, and many other creative expressions but not helpful in achieving the goal. Ultimately using a model to determine if a person has a human picture or a picture of something will create a cost-effective way to track if profiles have pictures of the employees.
+#### Executive summary
+This project performs **exploratory data analysis (EDA)** and builds a **baseline image-classification model** to determine whether a Microsoft 365 profile picture contains a **real human face** vs. **avatar** vs. **animal** imagery.  
+In this module, the focus is on:
+- Cleaning and organizing the dataset(s)
+- Feature engineering where appropriate
+- EDA visualizations to understand variables and relationships
+- A single baseline model to serve as a comparison point for Module 24
 
-### Expected Results
+While this project does not attempt to create the application that will read profile pictures, it does
+provide the foundation model that could be used for that effort.
 
-By utilizing a pretrained model and fine-tuning it with the dataset described above, I expect to be able to a multi-classifier that can detect when a picture is a human face. I also expect the results to be consistent across race, gender, and age. 
+#### Rationale
+Accurate identification of real human faces in corporate profile photos improves directory quality, compliance with internal policies, and downstream people-search experiences. Automating this classification reduces manual review burden and increases consistency across a large tenant.
 
-## Data Sources
-We built the working dataset by combining **three sources referenced directly in `LoadDataset.ipynb`**:
+#### Research Question
+**Can we reliably distinguish real human-face profile images from non-human images using a lightweight, production-friendly baseline model?**  
+Sub-question explored in EDA:
+- Does the dataset represent many cultures and ages, and both sexes in a balanced way.
 
-- **Human faces — FairFace (Balanced Adults)**  
-  Repository: <https://github.com/joojs/fairface>  
-  Paper: <https://arxiv.org/pdf/2009.03224>  
-  *(The notebook also includes direct Google Drive links for the FairFace image zips.)*
+#### Data Sources
+Three separate datasets were used to provide input to create a unique dataset for this projects. 
 
-- **Avatars of human faces — Kaggle: Google Cartoon Set (rehost)**  
-  Kaggle dataset: <https://www.kaggle.com/datasets/brendanartley/cartoon-faces-googles-cartoon-set>
+Planned/used sources (documented in notebooks):
+- **Human faces:** - [FairFace](https://github.com/joojs/fairface) (diverse, labeled faces)
+    Repository: <https://github.com/joojs/fairface>
+- **Avatar:** - [Google Cartoon Set / “cartoon faces”](https://www.kaggle.com/datasets/brendanartley/cartoon-faces-googles-cartoon-set)
+    Kaggle dataset: <https://www.kaggle.com/datasets/brendanartley/cartoon-faces-googles-cartoon-set>
+- **animals** - [Dogs vs Cats](https://www.kaggle.com/datasets/salader/dogs-vs-cats)
+    Kaggle dataset: <https://www.kaggle.com/datasets/salader/dogs-vs-cats>
 
-- **Animals / “other” — Kaggle: Dogs vs Cats**  
-  Kaggle dataset: <https://www.kaggle.com/datasets/salader/dogs-vs-cats>
 
-Three classes will be used in this model:
-- `human` — a real human face is present,
-- `avatar` — stylized/cartoon/AI-generated depiction of a human face,
-- `animal` — any non‑human class (we also map “other/objects/landscapes” into this bucket for enforcement simplicity).
+The final dataset looks like:
+Train: 24,000 total → {'human': 8000, 'avatar': 8000, 'animal': 8000}
+Val: 3,000 total → {'human': 1000, 'avatar': 1000, 'animal': 1000}
+Test: 3,000 total → {'human': 1000, 'avatar': 1000, 'animal': 1000}
 
-```
-.
-├── data/
-│   └── final/
-│       ├── train/
-│       │   ├── human/   ├── avatar/   └── animal/
-│       ├── val/
-│       │   ├── human/   ├── avatar/   └── animal/
-│       └── test/
-│           ├── human/   ├── avatar/   └── animal/
-```
+#### Methodology
+1. **Data loading & cleaning** (see `LoadDataset.ipynb`):
+   - Ingest datasets into a common folder structure with `train/val/test` splits.
+   - Deduplicate and remove unreadable or tiny images.
+2. **EDA** (see `UCB_ML_Capstone.ipynb`):
+   - Class distribution and split verification.
+   - Sample grids of each class.
+3. **Feature engineering** (see `UCB_ML_Capstone.ipynb`):
+   - Basic augmentations using a Keras data_augmentation layer with RandomFlip, RandomRotation, RandomBrightness, and RandomContrast during training.
+4. **Baseline model** (trained/evaluated in `UCB_ML_Capstone.ipynb`):
+   - **Approach:** Pretrained ResNet50 (frozen) as a feature extractor, with a small classification head (softmax) for three-way classification — human, avatar, and animal.
+   - **Why:** Strong off-the-shelf features, quick to train, easy to deploy; serves as a fair, reproducible starting point for Module 24 comparisons.
+5. **Evaluation (baseline):**
+   - Accuracy, precision/recall/F1 (macro), confusion matrix.
+   - Per-class recall to surface asymmetries.
 
-## Notebooks
+>>>No fine-tuning.
 
-- **LoadDataset.ipynb** (<https://github.com/lobral2728/ucb_ml_capstone/blob/main/LoadDataset.ipynb>)— Locates images in `data/final/`, builds deterministic stratified splits, and constructs an efficient `tf.data` input pipeline (decode -> resize with padding -> normalize -> optional augmentation). Includes quick EDA and visualization of class balance, sample images, and integrity checks (e.g., dedup across splits).
-- **UCB_ML_Capstone.ipynb** (<https://github.com/lobral2728/ucb_ml_capstone/blob/main/UCB_ML_Capstone.ipynb>)— Defines, trains, and evaluates the model (ResNet50 backbone frozen; classification head trained). Exports metrics, a confusion matrix, classification report, and a 24‑image **test predictions gallery** with labels, predictions, and probabilities.
+#### Results
+![Accuracy](images/accuracy.png)
+![Confusion matrix](images/confusion_matrix.png)
+![Sample Test Predictions](images/test_predictions_gallery.png)
 
-## Development Environment - Third time's the charm!
+#### Next steps
+What suggestions do you have for next steps?
 
-Initially, the notebooks were built on Windows 11 using Anaconda. As the model evolved, building on the CPU became very slow. After several attempts to optimize for CPU, developing on native Windows was abandoned. Enter Docker: Docker offers prebuilt images for TensorFlow, and it has no problem accessing the PC’s GPU. Unfortunately, out-of-memory conditions plagued this approach. Finally, development was moved to Colab. After a few days of learning how Colab works, developing notebooks was a breeze. You can access as much GPU as you need, and running out of memory didn’t seem to be an issue. That’s not to say Colab doesn’t have its quirks but that’s a topic for another time.
+More non-human image subjects.
+Compare other models
+Hyperparameter tuning
+Finetuning
+MobileNet
+Read output
+- Packaging for Azure inference (container, health checks, telemetry).
 
-## Why ResNet50?
-ResNet‑50 is a strong, widely validated backbone for image classification, with skip‑connections that enable training deeper models reliably. Features learned on large natural‑image corpora (e.g., ImageNet) transfer well to downstream tasks, especially in the early convolutional blocks. We use ResNet‑50 as a frozen **feature extractor** and train a lightweight head on top.
-- He et al., “Deep Residual Learning for Image Recognition.” CVPR 2016 / arXiv:1512.03385.  
-- Yosinski et al., “How transferable are features in deep neural networks?” NeurIPS 2014.  
-- Keras Applications: ResNet / input preprocessing and expected shapes.
+#### Outline of project
+- [LoadDataset.ipynb](LoadDataset.ipynb) — dataset ingestion, cleaning, splits, and data quality checks.
+- [UCB_ML_Capstone.ipynb](UCB_ML_Capstone.ipynb) — EDA visuals, baseline model training/evaluation, and error analysis.
 
-> Note: In this project we **do not perform fine‑tuning** of the backbone (all ResNet layers remain non‑trainable). This choice keeps training fast and stable and simplifies reproducibility. You can enable fine‑tuning later as an extension.
+##### Contact and Further Information
+For questions or collaboration, please contact **Allen Long** by filing an issue in the GitHub repo.
 
-## Data Processing
 
-We combined **three labeled image sources** into a single, de‑duplicated dataset and then used the on‑disk stratified splits under `data/final/`.
 
-> Replace the placeholders with your actual dataset names/links.
-- **[Dataset A — Human faces]**: real human portraits/headshots from diverse demographics and capture conditions.
-- **[Dataset B — Avatars / Synthetic faces]**: cartoons, drawings, emojis, stylized or AI‑generated depictions of human faces.
-- **[Dataset C — Non‑human images]**: animals and “other” (landscapes, objects, vehicles, etc.).
-
-**Consolidation workflow**
-1. **Ingest & manifest.** Built a manifest CSV with `source, original_path, rel_path, class, split, sha1, phash`.
-2. **Quality filters.** Removed unreadable/corrupt/tiny images; standardized to RGB.
-3. **Label normalization.** Mapped source labels into `{human, avatar, animal}` via an explicit mapping table kept with the code.
-4. **De‑duplication (exact and near‑duplicate).**  
-   - Exact duplicates removed using **sha1**.  
-   - Near‑duplicates flagged with **perceptual hash (pHash)** and culled preferentially from `val`/`test` to prevent leakage.
-5. **Stratified splits.** Ensured class proportions are similar across `train` / `val` / `test` and wrote files to the directory structure above.
-6. **Imbalance handling.** Preserved natural frequencies but used **class weights** during training.
-7. **Resizing policy.** Resizing is **on‑the‑fly** in the input pipeline via `tf.image.resize_with_pad` to avoid distortion or content cropping; the stored images on disk are not destructively resized.
-
-**Why these steps?**
-- **De‑duplication** avoids inflation of metrics due to train/val/test leakage (near‑duplicates are known to bias benchmarks).  
-- **Stratified splits** yield more stable evaluation across classes.  
-- **On‑the‑fly resize with padding** preserves aspect ratio and matches the model’s expected input size (224×224 for ResNet‑50).  
-- **Class weights** counter class imbalance without resampling the files on disk.
-
-## Model and Training
-- **Backbone:** `ResNet50` (`include_top=False`, pretrained on ImageNet), **frozen**.
-- **Head:** GlobalAveragePooling → Dropout → Dense(3, softmax).  
-- **Loss/Labels:** `SparseCategoricalCrossentropy` with `from_logits=False` (softmax outputs).  
-- **Optimizer:** `Adam(learning_rate=1e-4)` (fast, robust convergence for the small head).  
-- **Augmentation:** Keras preprocessing layers (random flips/rotations/color jitter) applied only on training batches.  
-- **Mixed precision:** Enabled when supported (speeds up training and reduces memory use on modern GPUs).  
-- **Checkpoints:** Save‑best‑only weights on the minimum validation loss; reload best weights before evaluation.  
-- **Epochs:** 15 (early stopping on `val_loss` with patience, so actual epochs may be lower).  
-- **Batch size:** 16 (fits a typical 8–12 GB GPU with 224×224 inputs and augmentation).
-
-## Running
-1. Consolidated data under `data/final/{train,val,test}/{human,avatar,animal}/`.
-2. Run **LoadDataset.ipynb** to verify splits, view sample images, and build the `tf.data` pipeline.
-3. Run **UCB_ML_Capstone.ipynb** to train/evaluate. The notebook will:
-   - compute class weights from the train distribution,
-   - train the classification head (backbone frozen),
-   - save `resnet50_best.weights.h5` and `history_frozen.json`,
-   - render `test_predictions_gallery.png` (24 test images with labels, predictions, and probabilities).
-
-## Results (example)
-Below is a sample of the exported gallery from the test set. Your run will reproduce a similar artifact.
-![Test predictions gallery](test_predictions_gallery.png)
-
-Key reported metrics include accuracy, per‑class precision/recall/F1, and a confusion matrix. See the notebook output for exact numbers for your data snapshot.
-
-## Key References
-- **ResNet** — He, K., Zhang, X., Ren, S., & Sun, J. (2016). *Deep Residual Learning for Image Recognition.* CVPR / arXiv:1512.03385. https://arxiv.org/abs/1512.03385
-- **Transferability of features** — Yosinski, J., Clune, J., Bengio, Y., & Lipson, H. (2014). *How transferable are features in deep neural networks?* NeurIPS. https://arxiv.org/abs/1411.1792
-- **Keras Applications: ResNet** — https://keras.io/api/applications/resnet/
-- **Transfer learning & fine‑tuning (Keras guide)** — https://keras.io/guides/transfer_learning/
-- **TensorFlow tutorial: Transfer learning** — https://www.tensorflow.org/tutorials/images/transfer_learning
-- **Mixed precision (TensorFlow Core guide)** — https://www.tensorflow.org/guide/mixed_precision
-- **Data augmentation layers (Keras)** — https://keras.io/api/layers/preprocessing_layers/
-- **Global average pooling (Keras)** — https://keras.io/api/layers/pooling_layers/global_average_pooling2d/
-- **Dropout (Srivastava et al., 2014)** — https://jmlr.org/papers/v15/srivastava14a.html
-- **Softmax + categorical cross‑entropy (Keras)** — https://keras.io/api/losses/probabilistic_losses/#sparsecategoricalcrossentropy-class
-- **Class weights (scikit‑learn)** — https://scikit-learn.org/stable/modules/generated/sklearn.utils.class_weight.compute_class_weight.html
-- **De‑duplication & leakage** — Barz & Denzler (2020), *Do We Train on Test Data? Purging CIFAR of Near‑Duplicate Images.* https://arxiv.org/abs/1902.00423
-- **Resize with padding (TensorFlow)** — https://www.tensorflow.org/api_docs/python/tf/image/resize_with_pad
-
-## Notes
-- We intentionally **do not fine‑tune** the backbone in this version to keep training fast and reproducible. Future work can unfreeze upper ResNet blocks and fine‑tune at a lower learning rate.
