@@ -21,7 +21,7 @@ Accurate identification of real human faces in corporate profile photos improves
 **Can we reliably distinguish real human-face profile images, avatar images of human faces, and from non-human images (e.g. cat, dog) using a lightweight, production-friendly baseline model?**  
 
 Sub-question explored in EDA:
-- Can we accurately predict human images for diverse cultures, ages, and sexes.
+- Can we accurately predict human images for diverse cultures, ages, and both sexes.
 
 #### Data Sources
 Three separate datasets were used to provide input to create a unique dataset for this projects. 
