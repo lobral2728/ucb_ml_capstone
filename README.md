@@ -60,8 +60,14 @@ The final dataset looks like:<br>
 > Note: In this project we **do not perform fine‑tuning** of the backbone (all ResNet layers remain non‑trainable). The accuracy was very good even without it.
 
 #### Results
+The training and validation accuracy for the frozen base model are extremely high, roughly 99.8–100% after the first couple of epochs. Early stopping happened at epoch 8 when 15 total epochs were set.
 ![Accuracy](images/accuracy.png)
+
+Accuracy: 0.9997 on 3,000 images (2,999/3,000 correct).
+Macro/weighted F1: 0.9997 — performance is uniformly high across classes.
 ![Confusion matrix](images/confusion_matrix.png)
+
+The sample output demonstrates the ability of the model to classify humans, avatars (of human faces), and animals (cats, dogs).
 ![Sample Test Predictions](images/test_predictions_gallery.png)
 
 #### Next steps
@@ -70,14 +76,11 @@ There are many opportunities to do additional analysis and modeling in the next 
 - There are other models to try, including light-weight CNNs like MobileNetV2, vision transformers, and other approaches.
 - Look at hyperameters and tuning, including batch size, image size, unfrozen layers, regularization, and more.
 - Finetuning
-- Packaging for Azure (unrelated to this assignment).
-    - [Repo](https://github.com/lobral2728/azureprofileapp)
+- Packaging for Azure (independent of this assignment). [Repo](https://github.com/lobral2728/azureprofileapp)
 
 #### Outline of project
 - [LoadDataset.ipynb](LoadDataset.ipynb) — dataset ingestion, cleaning, splits, and data quality checks.
 - [UCB_ML_Capstone.ipynb](UCB_ML_Capstone.ipynb) — EDA visuals, baseline model training/evaluation, and error analysis.
-
-
 
 ##### Contact and Further Information
 For questions or collaboration, please contact **Allen Long** by filing an issue in the GitHub repo.
