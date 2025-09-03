@@ -57,7 +57,7 @@ The final dataset looks like:<br>
    - Accuracy, precision/recall/F1 (macro), confusion matrix.
    - Per-class recall to surface asymmetries.
 
-> Note: In this project we **do not perform fine‑tuning** of the backbone (all ResNet layers remain non‑trainable). This choice keeps training fast and stable and simplifies reproducibility. You can enable fine‑tuning later as an extension.
+> Note: In this project we **do not perform fine‑tuning** of the backbone (all ResNet layers remain non‑trainable). The accuracy was very good even without it.
 
 #### Results
 ![Accuracy](images/accuracy.png)
@@ -65,18 +65,19 @@ The final dataset looks like:<br>
 ![Sample Test Predictions](images/test_predictions_gallery.png)
 
 #### Next steps
-
-More non-human image subjects.
-Compare other models
-Hyperparameter tuning
-Finetuning
-MobileNet
-Read output
-Packaging for Azure inference (container, health checks, telemetry).
+There are many opportunities to do additional analysis and modeling in the next round.
+- The images were limited to humans, avatars, and pets (cats, dogs) for this assignment, but a profile picture could be anything. There is a need to test against a more diverse set of images and improve the dataset and model to handle those.
+- There are other models to try, including light-weight CNNs like MobileNetV2, vision transformers, and other approaches.
+- Look at hyperameters and tuning, including batch size, image size, unfrozen layers, regularization, and more.
+- Finetuning
+- Packaging for Azure (unrelated to this assignment).
+    - [Repo](https://github.com/lobral2728/azureprofileapp)
 
 #### Outline of project
 - [LoadDataset.ipynb](LoadDataset.ipynb) — dataset ingestion, cleaning, splits, and data quality checks.
 - [UCB_ML_Capstone.ipynb](UCB_ML_Capstone.ipynb) — EDA visuals, baseline model training/evaluation, and error analysis.
+
+
 
 ##### Contact and Further Information
 For questions or collaboration, please contact **Allen Long** by filing an issue in the GitHub repo.
