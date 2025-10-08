@@ -70,23 +70,26 @@ There are two additional CSVs created to enable fairness analysis and leakate/sh
 
 
 
-#### Results
+## Results
 
-##### Leakage and SHortcuts
+### Leakage and SHortcuts
 - pHash duplicate report reviewed (`cross_split_phash_near_duplicates*.csv`)
 - Embedding-based near-duplicate report reviewed (`cross_split_embedding_near_duplicates.csv`)
 - Identity leakage report reviewed (`cross_split_identity_leakage.csv`)
 - Metadata-only shortcut report reviewed (`metadata_only_shortcut_report.txt`)
 - ([exclusions.txt](reports/audit_outputs/exclusions.txt)) created to use with the data loader.
 
-##### Best Model and Hyper-Parameters
+### Best Model and Hyper-Parameters
 - After testing 24 combinations of model, learning rate, batch size, and dropout rate, the best mix is:
 ![Best Model and Hyper-parameters](images/BestModelAndParams.png)
 
-###### Audit for Leakage and Shortcuts
+### Audit for Leakage and Shortcuts
 Numerous audit techniques were used. The combined result for recommended exclusions can be found in ([exclusions.txt](reports/audit_outputs/exclusions.txt)).
 
-###### Fairness
+### Fairness
+
+
+
 
 ###### Training Results
 Model saturated with the frozen backbone. It's already near-perfect with the head-only training. 
