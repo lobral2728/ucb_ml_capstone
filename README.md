@@ -75,7 +75,7 @@ There are two additional CSVs created to enable fairness analysis and leakage/sh
 
 ## Results
 
-### Leakage and SHortcuts
+### Leakage and Shortcuts
 - pHash duplicate report reviewed (`cross_split_phash_near_duplicates*.csv`)
 - Embedding-based near-duplicate report reviewed (`cross_split_embedding_near_duplicates.csv`)
 - Identity leakage report reviewed (`cross_split_identity_leakage.csv`)
