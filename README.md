@@ -37,7 +37,7 @@ Planned/used sources (documented in notebooks):
 
 ##### New Features in This Repo
 * GridSearch notebook (see [GridSearch.ipynb](GridSearch.ipynb)) Performs analysis of hyper-parameters and alternate models. This was not included in the main notebook to keep it readable. It provides analysis on which would be the best combination of model and hyper-parameters. 
-* LeakageSHortcutsAudit notebook (see [LeakageShortcutsAudit.ipynb](LeakageShortcutsAudit.ipynb)) Produces a recommendation of what images to remove based on numerous techniques in ([exclusions.txt](audit_outputs/exclusions.txt)
+* LeakageSHortcutsAudit notebook (see [LeakageShortcutsAudit.ipynb](LeakageShortcutsAudit.ipynb)) Produces a recommendation of what images to remove based on numerous techniques in ([exclusions.txt](audit_outputs/exclusions.txt))
 * GradCAM notebook (see [GradcamInspectionh.ipynb](GradcamInspection.ipynb)) Unfortunately still has problems and does not work.
 
 #### Methodology
