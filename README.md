@@ -79,6 +79,18 @@ There are two additional CSVs created to enable fairness analysis and leakate/sh
 - Metadata-only shortcut report reviewed (`metadata_only_shortcut_report.txt`)
 - ([exclusions.txt](reports/audit_outputs/exclusions.txt)) created to use with the data loader.
 
+##### Best Model and Hyper-Parameters
+- After testing 24 combinations of model, learning rate, batch size, and dropout rate, the best mix is:
+![Best Model and Hyper-parameters](images/BestModelAndParams.png)
+
+###### Audit for Leakage and Shortcuts
+Numerous audit techniques were used. The combined result for recommended exclusions can be found in ([exclusions.txt](reports/audit_outputs/exclusions.txt)).
+
+###### Fairness
+
+###### Training Results
+Model saturated with the frozen backbone. It's already near-perfect with the head-only training. 
+
 The training and validation accuracy for the frozen base model are extremely high, roughly 99.8–100% after the first couple of epochs. Early stopping happened at epoch 8 when 15 total epochs were set.
 ![Accuracy](images/accuracy.png)
 
@@ -97,6 +109,9 @@ There are many opportunities to do additional analysis and modeling in the next 
 - Finetuning
 - Packaging for Azure (independent of this assignment). [Repo](https://github.com/lobral2728/azureprofileapp)
 - I'm looking forward to the upcoming module that cover CNNs to learn other steps to try.
+
+NEW
+- Unfreeze top layers to try to get a little extra accuracy.
 
 #### Outline of project
 - [LoadDataset.ipynb with no output](LoadDataset.ipynb) — dataset ingestion, cleaning, splits, and data quality checks. The notebook created in Google Colab does not render in GitHub when there is output in it. This notebook shows the code.
