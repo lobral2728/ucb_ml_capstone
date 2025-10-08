@@ -70,26 +70,43 @@ There are two additional CSVs created to enable fairness analysis and leakate/sh
 
 
 
-#### Results
+## Results
 
-##### Leakage and SHortcuts
+### Leakage and SHortcuts
 - pHash duplicate report reviewed (`cross_split_phash_near_duplicates*.csv`)
 - Embedding-based near-duplicate report reviewed (`cross_split_embedding_near_duplicates.csv`)
 - Identity leakage report reviewed (`cross_split_identity_leakage.csv`)
 - Metadata-only shortcut report reviewed (`metadata_only_shortcut_report.txt`)
 - ([exclusions.txt](reports/audit_outputs/exclusions.txt)) created to use with the data loader.
 
-##### Best Model and Hyper-Parameters
+### Best Model and Hyper-Parameters
 - After testing 24 combinations of model, learning rate, batch size, and dropout rate, the best mix is:
 ![Best Model and Hyper-parameters](images/BestModelAndParams.png)
 
-###### Audit for Leakage and Shortcuts
+### Audit for Leakage and Shortcuts
 Numerous audit techniques were used. The combined result for recommended exclusions can be found in ([exclusions.txt](reports/audit_outputs/exclusions.txt)).
 
-###### Fairness
+### Fairness
+Fairness was analyzed with a number of methods. We see that the dataset is well balanced across age, gender, and race.
+![Split Makeup](images/Submission2/SplitMakeup.png)
 
-###### Training Results
+Because F1 is computed across all 3 classes, the two classes that don’t appear in that slice get F1=0 (with zero_division=0). The one present class has F1=1 (since accuracy is 100%). Averaging (1 + 0 + 0) / 3 = 0.333....
+![Fairness (Age)](images/Submission2/FairnessAge.png)
+![Fairness (Gender)](images/Submission2/FairnessGender.png)
+![Fairness (Race)](images/Submission2/FairnessRace.png)
+
+### Training Results
 Model saturated with the frozen backbone. It's already near-perfect with the head-only training. 
+* Per-class recall = 100% (each row sums to 1 and all mass is on the correct column).
+* Because there are no off-diagonal counts anywhere, there are also 0 false positives → precision = 100% and F1 = 1.0 for all classes on this eval set.
+* Overall accuracy is effectively 100% on this split.
+
+![Confusion Matrix](images/Submission2/ConfusionMatrix.png)
+
+### Sample Output
+
+
+
 
 The training and validation accuracy for the frozen base model are extremely high, roughly 99.8–100% after the first couple of epochs. Early stopping happened at epoch 8 when 15 total epochs were set.
 ![Accuracy](images/accuracy.png)
