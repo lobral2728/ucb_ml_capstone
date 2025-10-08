@@ -51,7 +51,7 @@ The final dataset looks like:<br>
 ```
 There are two additional CSVs created to enable fairness analysis and leakage/shortcut audit.
 * [Fairness](reports/fairness_reports/scores/score_df_all.csv)
-* [Fairness Confusion Matricies](reports/fairness_human_subset/)
+* [Fairness Confusion Matricies](reports/fairness_human_subset)
 * [Leakage and Shortcuts](reports/audit_outputs)
 
 > **NOTE**: This dataset will not render in github when there is output in it. Please see the file: <file> for the output.<br>
