@@ -47,10 +47,12 @@ The final dataset looks like:<br>
 ```
 There are two additional CSVs created to enable fairness analysis and leakate/shortcut audit.
 
-NOTE: This dataset will not render in github when there is output in it. Please see the file: <file> for the output.<br>
+> **NOTE**: This dataset will not render in github when there is output in it. Please see the file: <file> for the output.<br>
 2. **EDA** (see [UCB_ML_Capstone.ipynb](UCB_ML_Capstone.ipynb)):
    - Class distribution and split verification.
+   - Analysis of the sub-classes in the human split for age, sex, and ethnicity.
    - Sample grids of each class.
+   - Fairness analysis.
 3. **Feature engineering** (see [UCB_ML_Capstone.ipynb](UCB_ML_Capstone.ipynb)):
    - Basic augmentations using a Keras data_augmentation layer with RandomFlip, RandomRotation, RandomBrightness, and RandomContrast during training.
 4. **Baseline model** (trained/evaluated in [UCB_ML_Capstone.ipynb](UCB_ML_Capstone.ipynb)):
@@ -60,7 +62,9 @@ NOTE: This dataset will not render in github when there is output in it. Please 
    - Accuracy, precision/recall/F1 (macro), confusion matrix.
    - Per-class recall to surface asymmetries.
 
-> Note: In this project we **do not perform fine‑tuning** of the backbone (all ResNet layers remain non‑trainable). The accuracy was very good even without it.
+##### Implemented but not Integrated
+* LeakageSHortcutsAudit notebook produces a recommendation of what images to remove. This analysis is complete but the result was not integrated into the main notebook.
+* GradCAM notebook unfortunately still has problems and does not work.
 
 #### Results
 The training and validation accuracy for the frozen base model are extremely high, roughly 99.8–100% after the first couple of epochs. Early stopping happened at epoch 8 when 15 total epochs were set.
