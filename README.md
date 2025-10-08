@@ -104,31 +104,12 @@ Model saturated with the frozen backbone. It's already near-perfect with the hea
 ![Confusion Matrix](images/Submission2/ConfusionMatrix.png)
 
 ### Sample Output
-
-
-
-
-The training and validation accuracy for the frozen base model are extremely high, roughly 99.8–100% after the first couple of epochs. Early stopping happened at epoch 8 when 15 total epochs were set.
-![Accuracy](images/accuracy.png)
-
-- Accuracy: 0.9997 on 3,000 images (2,999/3,000 correct).
-- Macro/weighted F1: 0.9997 — performance is uniformly high across classes.
-![Confusion matrix](images/confusion_matrix.png)
-
 The sample output demonstrates the ability of the model to classify humans, avatars (of human faces), and animals (cats, dogs).
-![Sample Test Predictions](images/test_predictions_gallery.png)
+![Sample Output](images/Submission2/ImageClassifiedOutput.png)
 
-#### Next steps
-There are many opportunities to do additional analysis and modeling in the next round.
-- The images were limited to humans, avatars, and pets (cats, dogs) for this assignment, but a profile picture could be anything. There is a need to test against a more diverse set of images and improve the dataset and model to handle those.
-- There are other models to try, including light-weight CNNs like MobileNetV2, vision transformers, and other approaches.
-- Look at hyperameters and tuning, including batch size, image size, unfrozen layers, regularization, and more.
-- Finetuning
-- Packaging for Azure (independent of this assignment). [Repo](https://github.com/lobral2728/azureprofileapp)
-- I'm looking forward to the upcoming module that cover CNNs to learn other steps to try.
-
-NEW
+## Next steps
 - Unfreeze top layers to try to get a little extra accuracy.
+- Bug in image classification output 48 images are output when 24 were specified. Each image is duplicated in the output only.
 
 #### Outline of project
 - [LoadDataset.ipynb with no output](LoadDataset.ipynb) — dataset ingestion, cleaning, splits, and data quality checks. The notebook created in Google Colab does not render in GitHub when there is output in it. This notebook shows the code.
