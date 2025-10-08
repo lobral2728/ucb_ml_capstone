@@ -110,10 +110,12 @@ The sample output demonstrates the ability of the model to classify humans, avat
 ## Next steps
 - Unfreeze top layers to try to get a little extra accuracy.
 - Bug in image classification output 48 images are output when 24 were specified. Each image is duplicated in the output only.
+- Apply the findings of Leakage and Shortcuts audit.
+- Implement the best model and hyper-parameters.
 
 #### Outline of project
 - [LoadDataset.ipynb with no output](LoadDataset.ipynb) — dataset ingestion, cleaning, splits, and data quality checks. The notebook created in Google Colab does not render in GitHub when there is output in it. This notebook shows the code.
-- [LoadDataset.ipynb with output](output/LoadDataset.ipynb) - This notebook shows output. You will need to clone the repo and look at the notebook with VS Code or a similar tool.
+- [LoadDataset.ipynb with output](output/Submission2/LoadDataset.ipynb) - This notebook shows output. You will need to clone the repo and look at the notebook with VS Code or a similar tool.
 - [UCB_ML_Capstone.ipynb](UCB_ML_Capstone.ipynb) — EDA visuals, baseline model training/evaluation, and error analysis.
 
 ##### Contact and Further Information
