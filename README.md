@@ -34,20 +34,25 @@ Planned/used sources (documented in notebooks):
 - **Animals** - Dogs vs Cats
     - Kaggle dataset: <https://www.kaggle.com/datasets/salader/dogs-vs-cats>
 
+
+
+#### Methodology
+1. **Data loading & cleaning** (see [LoadDataset.ipynb](LoadDataset.ipynb)):
+This notebook prepares a dataset of human, avatar, and animal faces for a machine learning image classification task. It downloads data from Google Drive and Kaggle, applies filtering based on age (for humans) and image quality (min dimension, aspect ratio). Human data is sampled using stratification to maintain demographic balance. All images are deduplicated based on visual content, center-cropped to a square, and resized to a fixed dimension. The processed images are organized into an ImageFolder structure with train, validation, and test splits, and a CSV is generated mapping human images to their labels for traceability.
 The final dataset looks like:<br>
 ```
     Train: 24,000 total -> {'human': 8000, 'avatar': 8000, 'animal': 8000}
     Val: 3,000 total -> {'human': 1000, 'avatar': 1000, 'animal': 1000}
     Test: 3,000 total -> {'human': 1000, 'avatar': 1000, 'animal': 1000}
 ```
+There are two additional CSVs created to enable fairness analysis and leakate/shortcut audit.
 
-#### Methodology
-1. **Data loading & cleaning** (see [LoadDataset.ipynb](LoadDataset.ipynb)):
-   - Ingest datasets into a common folder structure with `train/val/test` splits.
-   - Deduplicate and remove unreadable or tiny images.
+> **NOTE**: This dataset will not render in github when there is output in it. Please see the file: <file> for the output.<br>
 2. **EDA** (see [UCB_ML_Capstone.ipynb](UCB_ML_Capstone.ipynb)):
    - Class distribution and split verification.
+   - Analysis of the sub-classes in the human split for age, sex, and ethnicity.
    - Sample grids of each class.
+   - Fairness analysis.
 3. **Feature engineering** (see [UCB_ML_Capstone.ipynb](UCB_ML_Capstone.ipynb)):
    - Basic augmentations using a Keras data_augmentation layer with RandomFlip, RandomRotation, RandomBrightness, and RandomContrast during training.
 4. **Baseline model** (trained/evaluated in [UCB_ML_Capstone.ipynb](UCB_ML_Capstone.ipynb)):
@@ -57,7 +62,9 @@ The final dataset looks like:<br>
    - Accuracy, precision/recall/F1 (macro), confusion matrix.
    - Per-class recall to surface asymmetries.
 
-> Note: In this project we **do not perform fine‑tuning** of the backbone (all ResNet layers remain non‑trainable). The accuracy was very good even without it.
+##### Implemented but not Integrated
+* LeakageSHortcutsAudit notebook produces a recommendation of what images to remove. This analysis is complete but the result was not integrated into the main notebook.
+* GradCAM notebook unfortunately still has problems and does not work.
 
 #### Results
 The training and validation accuracy for the frozen base model are extremely high, roughly 99.8–100% after the first couple of epochs. Early stopping happened at epoch 8 when 15 total epochs were set.
