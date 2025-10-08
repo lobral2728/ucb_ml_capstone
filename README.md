@@ -77,7 +77,7 @@ There are two additional CSVs created to enable fairness analysis and leakate/sh
 - Embedding-based near-duplicate report reviewed (`cross_split_embedding_near_duplicates.csv`)
 - Identity leakage report reviewed (`cross_split_identity_leakage.csv`)
 - Metadata-only shortcut report reviewed (`metadata_only_shortcut_report.txt`)
--([audit_reports/exclusions.txt](exclusions.txt)) created to use with the data loader.
+-(([exclusions.txt](reports/audit_outputs/exclusions.txt)) created to use with the data loader.
 
 The training and validation accuracy for the frozen base model are extremely high, roughly 99.8–100% after the first couple of epochs. Early stopping happened at epoch 8 when 15 total epochs were set.
 ![Accuracy](images/accuracy.png)
