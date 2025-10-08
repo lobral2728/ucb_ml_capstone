@@ -95,8 +95,12 @@ Because F1 is computed across all 3 classes, the two classes that don’t appear
 ![Fairness (Gender)](images/Submission2/FairnessGender.png)
 ![Fairness (Race)](images/Submission2/FairnessRace.png)
 
-###### Training Results
+### Training Results
 Model saturated with the frozen backbone. It's already near-perfect with the head-only training. 
+* Per-class recall = 100% (each row sums to 1 and all mass is on the correct column).
+* Because there are no off-diagonal counts anywhere, there are also 0 false positives → precision = 100% and F1 = 1.0 for all classes on this eval set.
+* Overall accuracy is effectively 100% on this split.
+![Confusion Matrix](images/Submission2/ConfusionMatrix.png)
 
 The training and validation accuracy for the frozen base model are extremely high, roughly 99.8–100% after the first couple of epochs. Early stopping happened at epoch 8 when 15 total epochs were set.
 ![Accuracy](images/accuracy.png)
