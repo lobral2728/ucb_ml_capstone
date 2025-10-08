@@ -87,8 +87,10 @@ There are two additional CSVs created to enable fairness analysis and leakate/sh
 Numerous audit techniques were used. The combined result for recommended exclusions can be found in ([exclusions.txt](reports/audit_outputs/exclusions.txt)).
 
 ### Fairness
-Fairness was analyzed with a number of methods. 
+Fairness was analyzed with a number of methods. We see that the dataset is well balanced across age, gender, and race.
 ![Split Makeup](images/Submission2/SplitMakeup.png)
+
+Because F1 is computed across all 3 classes, the two classes that don’t appear in that slice get F1=0 (with zero_division=0). The one present class has F1=1 (since accuracy is 100%). Averaging (1 + 0 + 0) / 3 = 0.333....
 ![Fairness (Age)](images/Submission2/FairnessAge.png)
 ![Fairness (Gender)](images/Submission2/FairnessGender.png)
 ![Fairness (Race)](images/Submission2/FairnessRace.png)
