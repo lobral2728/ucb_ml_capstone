@@ -33,8 +33,12 @@ Planned/used sources (documented in notebooks):
     - Kaggle dataset: <https://www.kaggle.com/datasets/brendanartley/cartoon-faces-googles-cartoon-set>
 - **Animals** - Dogs vs Cats
     - Kaggle dataset: <https://www.kaggle.com/datasets/salader/dogs-vs-cats>
+> Note: The Dogs vs Cats dataset no longer exists on Kaggle.
 
-
+##### New Features in This Repo
+* GridSearch notebook (see [GridSearch.ipynb](GridSearch.ipynb)) Performs analysis of hyper-parameters and alternate models. This was not included in the main notebook to keep it readable. It provides analysis on which would be the best combination of model and hyper-parameters. 
+* LeakageSHortcutsAudit notebook (see [LeakageShortcutsAudit.ipynb](LeakageShortcutsAudit.ipynb)) Produces a recommendation of what images to remove based on numerous techniques in ([audit_reports/exclusions.txt](exclusions.txt))
+* GradCAM notebook (see [GradcamInspectionh.ipynb](GradcamInspection.ipynb)) Unfortunately still has problems and does not work.
 
 #### Methodology
 1. **Data loading & cleaning** (see [LoadDataset.ipynb](LoadDataset.ipynb)):
@@ -48,6 +52,7 @@ The final dataset looks like:<br>
 There are two additional CSVs created to enable fairness analysis and leakate/shortcut audit.
 
 > **NOTE**: This dataset will not render in github when there is output in it. Please see the file: <file> for the output.<br>
+
 2. **EDA** (see [UCB_ML_Capstone.ipynb](UCB_ML_Capstone.ipynb)):
    - Class distribution and split verification.
    - Analysis of the sub-classes in the human split for age, sex, and ethnicity.
@@ -61,12 +66,12 @@ There are two additional CSVs created to enable fairness analysis and leakate/sh
 5. **Evaluation (baseline):**
    - Accuracy, precision/recall/F1 (macro), confusion matrix.
    - Per-class recall to surface asymmetries.
+   - Balanced human images (fairness)
 
-##### Implemented but not Integrated
-* LeakageSHortcutsAudit notebook produces a recommendation of what images to remove. This analysis is complete but the result was not integrated into the main notebook.
-* GradCAM notebook unfortunately still has problems and does not work.
+
 
 #### Results
+
 The training and validation accuracy for the frozen base model are extremely high, roughly 99.8–100% after the first couple of epochs. Early stopping happened at epoch 8 when 15 total epochs were set.
 ![Accuracy](images/accuracy.png)
 
