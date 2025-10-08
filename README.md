@@ -45,6 +45,7 @@ The final dataset looks like:<br>
     Val: 3,000 total -> {'human': 1000, 'avatar': 1000, 'animal': 1000}
     Test: 3,000 total -> {'human': 1000, 'avatar': 1000, 'animal': 1000}
 ```
+NOTE: This dataset will not render in github when there is output in it. Please see the file: <file> for the output.
 2. **EDA** (see [UCB_ML_Capstone.ipynb](UCB_ML_Capstone.ipynb)):
    - Class distribution and split verification.
    - Sample grids of each class.
