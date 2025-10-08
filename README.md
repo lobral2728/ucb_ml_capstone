@@ -50,6 +50,8 @@ The final dataset looks like:<br>
     Test: 3,000 total -> {'human': 1000, 'avatar': 1000, 'animal': 1000}
 ```
 There are two additional CSVs created to enable fairness analysis and leakate/shortcut audit.
+* [Fairness](reports/"fairness reports"/scores/score_df_all.csv)
+* [Fairness Confusion Matricies](reports/fairness_human_subset/)
 
 > **NOTE**: This dataset will not render in github when there is output in it. Please see the file: <file> for the output.<br>
 
