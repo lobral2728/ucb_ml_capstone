@@ -81,7 +81,7 @@ There are two additional CSVs created to enable fairness analysis and leakate/sh
 
 ##### Best Model and Hyper-Parameters
 - After testing 24 combinations of model, learning rate, batch size, and dropout rate, the best mix is:
-![Best Model and Hyper-parameters](images/
+![Best Model and Hyper-parameters](images/BestModelAndParams.png)
 
 The training and validation accuracy for the frozen base model are extremely high, roughly 99.8–100% after the first couple of epochs. Early stopping happened at epoch 8 when 15 total epochs were set.
 ![Accuracy](images/accuracy.png)
