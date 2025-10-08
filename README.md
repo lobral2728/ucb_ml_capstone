@@ -49,9 +49,10 @@ The final dataset looks like:<br>
     Val: 3,000 total -> {'human': 1000, 'avatar': 1000, 'animal': 1000}
     Test: 3,000 total -> {'human': 1000, 'avatar': 1000, 'animal': 1000}
 ```
-There are two additional CSVs created to enable fairness analysis and leakate/shortcut audit.
-* [Fairness](reports/"fairness reports"/scores/score_df_all.csv)
-* [Fairness Confusion Matricies](reports/fairness_human_subset/)
+There are two additional CSVs created to enable fairness analysis and leakage/shortcut audit.
+* [Fairness](reports/fairness_reports/scores/score_df_all.csv)
+* [Fairness Confusion Matricies](reports/fairness_reports/fairness_human_subset)
+* [Leakage and Shortcuts](reports/audit_outputs)
 
 > **NOTE**: This dataset will not render in github when there is output in it. Please see the file: <file> for the output.<br>
 
@@ -74,7 +75,7 @@ There are two additional CSVs created to enable fairness analysis and leakate/sh
 
 ## Results
 
-### Leakage and SHortcuts
+### Leakage and Shortcuts
 - pHash duplicate report reviewed (`cross_split_phash_near_duplicates*.csv`)
 - Embedding-based near-duplicate report reviewed (`cross_split_embedding_near_duplicates.csv`)
 - Identity leakage report reviewed (`cross_split_identity_leakage.csv`)
@@ -114,6 +115,7 @@ The sample output demonstrates the ability of the model to classify humans, avat
 - Bug in image classification output 48 images are output when 24 were specified. Each image is duplicated in the output only.
 - Apply the findings of Leakage and Shortcuts audit.
 - Implement the best model and hyper-parameters.
+- Fix GradCAM.
 
 #### Outline of project
 - [LoadDataset.ipynb with no output](LoadDataset.ipynb) — dataset ingestion, cleaning, splits, and data quality checks. The notebook created in Google Colab does not render in GitHub when there is output in it. This notebook shows the code.
