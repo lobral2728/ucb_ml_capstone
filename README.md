@@ -87,9 +87,11 @@ There are two additional CSVs created to enable fairness analysis and leakate/sh
 Numerous audit techniques were used. The combined result for recommended exclusions can be found in ([exclusions.txt](reports/audit_outputs/exclusions.txt)).
 
 ### Fairness
-
-
-
+Fairness was analyzed with a number of methods. 
+![Split Makeup](images/Submission2/SplitMakup.png)
+![Fairness (Age)](images/Submission2/FairnessAge.png)
+![Fairness (Gender)](images/Submission2/FairnessGender.png)
+![Fairness (Race)](images/Submission2/FairnessRace.png)
 
 ###### Training Results
 Model saturated with the frozen backbone. It's already near-perfect with the head-only training. 
