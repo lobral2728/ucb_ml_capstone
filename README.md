@@ -37,7 +37,7 @@ Planned/used sources (documented in notebooks):
 
 ##### New Features in This Repo
 * GridSearch notebook (see [GridSearch.ipynb](GridSearch.ipynb)) Performs analysis of hyper-parameters and alternate models. This was not included in the main notebook to keep it readable. It provides analysis on which would be the best combination of model and hyper-parameters. 
-* LeakageSHortcutsAudit notebook (see [LeakageShortcutsAudit.ipynb](LeakageShortcutsAudit.ipynb)) Produces a recommendation of what images to remove based on numerous techniques in ([audit_reports/exclusions.txt](exclusions.txt))
+* LeakageSHortcutsAudit notebook (see [LeakageShortcutsAudit.ipynb](LeakageShortcutsAudit.ipynb)) Produces a recommendation of what images to remove based on numerous techniques in ([exclusions.txt](reports/audit_outputs/exclusions.txt))
 * GradCAM notebook (see [GradcamInspectionh.ipynb](GradcamInspection.ipynb)) Unfortunately still has problems and does not work.
 
 #### Methodology
@@ -77,7 +77,7 @@ There are two additional CSVs created to enable fairness analysis and leakate/sh
 - Embedding-based near-duplicate report reviewed (`cross_split_embedding_near_duplicates.csv`)
 - Identity leakage report reviewed (`cross_split_identity_leakage.csv`)
 - Metadata-only shortcut report reviewed (`metadata_only_shortcut_report.txt`)
--([audit_reports/exclusions.txt](exclusions.txt)) created to use with the data loader.
+- ([exclusions.txt](reports/audit_outputs/exclusions.txt)) created to use with the data loader.
 
 The training and validation accuracy for the frozen base model are extremely high, roughly 99.8–100% after the first couple of epochs. Early stopping happened at epoch 8 when 15 total epochs were set.
 ![Accuracy](images/accuracy.png)
