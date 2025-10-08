@@ -1,0 +1,10 @@
+path_a,split_a,label_a,path_b,split_b,label_b,hamming
+/content/final/train/avatar/63ed948bfd80ec57.jpg,train,avatar,/content/final/test/avatar/acb17acf73015204.jpg,test,avatar,2
+/content/final/train/avatar/cff097ea4b3aec1b.jpg,train,avatar,/content/final/test/avatar/a80f38952f5293d4.jpg,test,avatar,4
+/content/final/train/avatar/c119a44251b77643.jpg,train,avatar,/content/final/test/avatar/8640bf83bf8a2a9f.jpg,test,avatar,4
+/content/final/train/avatar/9bd333c9c62ef7c7.jpg,train,avatar,/content/final/test/avatar/b9ba430ab32bb0a3.jpg,test,avatar,4
+/content/final/train/avatar/6da82102d0471235.jpg,train,avatar,/content/final/test/avatar/358ce41861184e07.jpg,test,avatar,4
+/content/final/train/avatar/88142a8fc54e8645.jpg,train,avatar,/content/final/val/avatar/18dc63647be9dd7c.jpg,val,avatar,4
+/content/final/train/avatar/3fdc468b51414fc4.jpg,train,avatar,/content/final/val/avatar/44cb6fcf028bee1d.jpg,val,avatar,4
+/content/final/train/avatar/b4cb652d6fd38489.jpg,train,avatar,/content/final/test/avatar/17e4a57aa3663a08.jpg,test,avatar,4
+/content/final/train/avatar/9576ff50f6454ceb.jpg,train,avatar,/content/final/val/avatar/cb37c1e1667e7d8e.jpg,val,avatar,4

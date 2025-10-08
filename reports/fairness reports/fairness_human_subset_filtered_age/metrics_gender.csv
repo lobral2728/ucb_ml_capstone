@@ -1,0 +1,3 @@
+group_col,group,n,acc,acc_lo,acc_hi,macro_f1,acc_gap_vs_min,acc_gap_vs_max
+gender,Female,484,1.0,0.9921253128064521,1.0,0.3333333333333333,0.0,0.0
+gender,Male,515,1.0,0.9925958134428696,1.0,0.3333333333333333,0.0,0.0
