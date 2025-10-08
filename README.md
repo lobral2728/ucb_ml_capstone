@@ -115,6 +115,7 @@ The sample output demonstrates the ability of the model to classify humans, avat
 - Bug in image classification output 48 images are output when 24 were specified. Each image is duplicated in the output only.
 - Apply the findings of Leakage and Shortcuts audit.
 - Implement the best model and hyper-parameters.
+- Fix GradCAM.
 
 #### Outline of project
 - [LoadDataset.ipynb with no output](LoadDataset.ipynb) — dataset ingestion, cleaning, splits, and data quality checks. The notebook created in Google Colab does not render in GitHub when there is output in it. This notebook shows the code.
