@@ -88,7 +88,7 @@ Numerous audit techniques were used. The combined result for recommended exclusi
 
 ### Fairness
 Fairness was analyzed with a number of methods. 
-![Split Makeup](images/Submission2/SplitMakup.png)
+![Split Makeup](images/Submission2/SplitMakeup.png)
 ![Fairness (Age)](images/Submission2/FairnessAge.png)
 ![Fairness (Gender)](images/Submission2/FairnessGender.png)
 ![Fairness (Race)](images/Submission2/FairnessRace.png)
