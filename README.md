@@ -34,21 +34,17 @@ Planned/used sources (documented in notebooks):
 - **Animals** - Dogs vs Cats
     - Kaggle dataset: <https://www.kaggle.com/datasets/salader/dogs-vs-cats>
 
+
+
+#### Methodology
+1. **Data loading & cleaning** (see [LoadDataset.ipynb](LoadDataset.ipynb)):
+This notebook prepares a dataset of human, avatar, and animal faces for a machine learning image classification task. It downloads data from Google Drive and Kaggle, applies filtering based on age (for humans) and image quality (min dimension, aspect ratio). Human data is sampled using stratification to maintain demographic balance. All images are deduplicated based on visual content, center-cropped to a square, and resized to a fixed dimension. The processed images are organized into an ImageFolder structure with train, validation, and test splits, and a CSV is generated mapping human images to their labels for traceability.
 The final dataset looks like:<br>
 ```
     Train: 24,000 total -> {'human': 8000, 'avatar': 8000, 'animal': 8000}
     Val: 3,000 total -> {'human': 1000, 'avatar': 1000, 'animal': 1000}
     Test: 3,000 total -> {'human': 1000, 'avatar': 1000, 'animal': 1000}
 ```
-
-#### Methodology
-1. **Data loading & cleaning** (see [LoadDataset.ipynb](LoadDataset.ipynb)):
-This notebook prepares a dataset of human, avatar, and animal faces for a machine learning image classification task. It downloads data from Google Drive and Kaggle, applies filtering based on age (for humans) and image quality (min dimension, aspect ratio). Human data is sampled using stratification to maintain demographic balance. All images are deduplicated based on visual content, center-cropped to a square, and resized to a fixed dimension. The processed images are organized into an ImageFolder structure with train, validation, and test splits, and a CSV is generated mapping human images to their labels for traceability. The created dataset has:
-| Split      | Total Images | Human | Avatar | Animal |
-| :--------- | :----------- | :---- | :----- | :----- |
-| Train      | 24000        | 8000  | 8000   | 8000   |
-| Validation | 3000         | 1000  | 1000   | 1000   |
-| Test       | 3000         | 1000  | 1000   | 1000   |
 2. **EDA** (see [UCB_ML_Capstone.ipynb](UCB_ML_Capstone.ipynb)):
    - Class distribution and split verification.
    - Sample grids of each class.
